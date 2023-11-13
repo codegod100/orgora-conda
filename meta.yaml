@@ -1,0 +1,38 @@
+{% set name = "orgorapython" %}
+{% set version = "0.1.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/codegod100/orgorapython/archive/{{ version }}.tar.gz
+  sha256: 4740a759b28ed10ec784c43791c05e6378f554de5b8ec9cb3b159cb4149e1604
+
+build:
+  noarch: python
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  number: 0
+
+requirements:
+  host:
+    - python >=3.9
+    - maturin >=0.14,<0.15
+    - pip
+  run:
+    - python >=3.9
+
+test:
+  imports:
+    - orgora
+  commands:
+    - pip check
+  requires:
+    - pip
+
+about:
+  license: 'MIT'
+
+extra:
+  recipe-maintainers:
+    - AddYourGitHubIdHere
